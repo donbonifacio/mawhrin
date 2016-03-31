@@ -35,3 +35,6 @@
     (p/> (.y c) 0)
     (p/<= (.x c) 8)
     (p/<= (.y c) 8)))
+
+(defmethod print-method Coordinate [^Coordinate coord ^java.io.Writer writer]
+  (print-method (str "c" (.x coord) (.y coord)) writer))

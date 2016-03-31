@@ -1,7 +1,6 @@
 (ns ^{:added "0.1.0" :author "Pedro Santos"}
   mawhrin.board
   "Represents a board"
-  (:refer-clojure :exclude [get set])
   (:import [mawhrin.coordinate Coordinate]
            [mawhrin.element Element])
   (:require [mawhrin.coordinate :as coordinate]
@@ -9,32 +8,27 @@
             [criterium.core :refer [quick-bench]]
             ))
 
-(deftype Board
-  [^objects elements])
+(defrecord Board
+  [elements])
 
 (defn create
   "Creates a board"
   []
-  (Board. (make-array Element (p/* 8 8))))
+  (Board. nil))
 
-(defn ^Element get
+(defn ^Element get-coord
   "Gets the element for the given coordinate"
   [^Board board ^Coordinate coord]
-  (let [pos (p/* (.x coord) (.y coord))
-        ^objects elements (.elements board)]
-    (aget elements pos)))
+  (get-in board [:elements coord]))
 
-(defn ^Board set
+(defn ^Board set-coord
   "Sets an element on a coordinate"
   [^Board board ^Coordinate coord ^Element elem]
-  (let [^objects elems (.elements board)
-        pos (p/* (.x coord) (.y coord))]
-    (aset elems pos elem)
-    board))
+  (update board :elements assoc coord elem))
 
 (defn empty-coord?
   "Checks if an element can be placed"
   [^Board board ^Coordinate coord]
   (and
     (coordinate/in-bounds? coord)
-    (nil? (get board coord))))
+    (nil? (get-coord board coord))))

@@ -12,3 +12,7 @@
   "Creates an element"
   [^Coordinate coord]
   (Element. coord))
+
+(defmethod print-method Element [^Element elem ^java.io.Writer writer]
+  (let [coord (.coord elem)]
+    (print-method (str "Elem c" (.x coord) (.y coord)) writer)))

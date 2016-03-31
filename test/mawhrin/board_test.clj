@@ -9,9 +9,9 @@
   (let [board (board/create)
         c11 (coordinate/create 1 1)]
     (is board)
-    (is (nil? (board/get board c11)))
+    (is (nil? (board/get-coord board c11)))
     (is (board/empty-coord? board c11))
     (let [elem (element/create c11)
-          board (board/set board c11 elem)]
-      (is (= elem (board/get board c11)))
+          board (board/set-coord board c11 elem)]
+      (is (= elem (board/get-coord board c11)))
       (is (false? (board/empty-coord? board c11))))))
