@@ -1,12 +1,11 @@
 (ns ^{:added "0.1.0" :author "Pedro Santos"}
   mawhrin.board
   "Represents a board"
-  (:import [mawhrin.coordinate Coordinate]
-           [mawhrin.element Element])
   (:require [mawhrin.coordinate :as coordinate]
-            [primitive-math :as p]
-            [criterium.core :refer [quick-bench]]
-            ))
+            [mawhrin.coordinate :as coordinate]
+            [primitive-math :as p])
+  (:import [mawhrin.coordinate Coordinate]
+           [mawhrin.element Element]))
 
 (defrecord Board
   [elements])
